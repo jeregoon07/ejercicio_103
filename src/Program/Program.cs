@@ -7,21 +7,33 @@
 using System;
 using Library;
 
-namespace Project
+using Ejercicio_103;
+public class Program
 {
-    /// <summary>
-    /// Programa principal.
-    /// </summary>
-    public static class Program
+    static void Main()
     {
-        /// <summary>
-        /// Punto de entrada al programa principal.
-        /// </summary>
-        public static void Main()
+        RegistroBiblioteca registro = RegistroBiblioteca.ObtenerInstancia();
+
+        Libro libro1 = new Libro("El coronel no tiene quien le escriba", "LOM3");
+        Libro libro2 = new Libro("Cronica de una muerta anunciada", "LOM4");
+
+        Revista revista1= new Revista("El Observador", "ROM2");
+
+        DVD dVD1= new DVD("El padrino", "D0T");
+
+        registro.AgregarMaterial(libro1);
+        registro.AgregarMaterial(libro2);
+        registro.AgregarMaterial(revista1);
+        registro.AgregarMaterial(dVD1);
+
+        Console.WriteLine("== Inspeccion de materiales ==");
+
+        InsepectorMateriales insepector = new InsepectorMateriales();
+        foreach(IMaterial material in registro.ObtenerMateriales())
         {
-            Train train = new Train();
-            train.StartEngines();
-            Console.WriteLine("Hello World!");
+            material.Aceptar(insepector);
         }
+        RegistroBiblioteca registro1 = RegistroBiblioteca.ObtenerInstancia();
+        RegistroBiblioteca registro2 = RegistroBiblioteca.ObtenerInstancia();
     }
 }
